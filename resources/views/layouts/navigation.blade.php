@@ -29,12 +29,12 @@
 
 
                     <li class=" menu-list ">
-                        <a href="{{ route('dash') }}" class="flex items-center {{ request()->is('dash') ? 'bg-gray-700' : '' }}">
+                        <a href="{{ route('dash') }}" class="flex items-center {{ request()->is('dash') ?  : '' }}">
                             <span class="mr-2"><i class="fas fa-plus"></i></span> Add Blog
                         </a>
                     </li>
                     <li class=" menu-list">
-                        <a href="{{ route('dash') }}" class="flex items-center {{ request()->is('dash') ? 'bg-gray-700' : '' }}">
+                        <a href="{{ route('dash') }}" class="flex items-center {{ request()->is('dash') ?  : '' }}">
                             <span class="mr-2"><i class="fas fa-plus"></i></span> List Blogs
                         </a>
                     </li>

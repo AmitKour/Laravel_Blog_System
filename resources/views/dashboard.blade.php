@@ -5,12 +5,5 @@
         </h2>
     </x-slot> --}}
 
-    <div class="flex">
-
-         <div class="w-1/5 bg-gray-800 py-8 px-4">
-
-        </div>
-
-
-    </div>
+  
 </x-app-layout>

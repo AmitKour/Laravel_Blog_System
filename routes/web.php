@@ -36,5 +36,5 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/dash',[BlogController::class,'index'])->name('dash');
+Route::get('/addblog',[BlogController::class,'index'])->name('dash');
 Route::post('/blog',[BlogCreateController::class,'store'])->name('blogs.create');

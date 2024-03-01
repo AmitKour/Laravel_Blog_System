@@ -13,7 +13,7 @@ class BlogController extends Controller
             'date' => now()->toDateString(), // Set default value to current date
         ]);
 
-        // Save the Blog instance
+        // Don't Save the Blog instance
         //$blog->save();
 
 

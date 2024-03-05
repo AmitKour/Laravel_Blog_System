@@ -65,6 +65,8 @@ class BlogCreateController extends Controller
     {
         $blogs = Blog::all();
 
+        $blogs = Blog::paginate(5);
+
         return view('shared.blogs', compact('blogs'));
     }
 
@@ -88,7 +90,7 @@ public function update(Request $request, $id)
 
     ]);
 
-  
+
     $blog->update([
         'title' => $request->input('title'),
         'date' => $request->input('date'),

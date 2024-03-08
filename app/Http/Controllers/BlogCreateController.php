@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
-
+use Illuminate\Support\Facades\Session;
 class BlogCreateController extends Controller
 {
     public function store(Request $request)
@@ -55,9 +55,10 @@ class BlogCreateController extends Controller
 
         $blog->save();
 
+        //Session::flash('success', 'Blog added successfully');
 
         // Redirect back with success message
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success','Blog added successfully.');
     }
 
 

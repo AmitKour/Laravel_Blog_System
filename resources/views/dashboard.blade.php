@@ -1,13 +1,14 @@
 <x-app-layout>
+ 
     @section('content')
 
         <x-slot name="header">
             <!-- Add your header content here if needed -->
         </x-slot>
-
-        <div class="py-12">
+        @include('form.success-message')
+        <div class="bg-white py-5">
             <div class="container mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 m-6 mb-10">
                     <!-- Total Count of Blogs Card -->
                     <div class="bg-red-200 rounded-lg shadow-md p-6">
                         <h3 class="text-lg font-semibold mb-2">Total Count of Blogs</h3>

@@ -29,15 +29,16 @@
 
 
 <li class="menu-list">
-    <a href="{{ route('dash') }}" class="flex items-center {{ request()->is('dash') ? 'active' : '' }}">
+    <a href="{{ route('dash') }}" class="flex items-center hover:underline focus:underline">
         <span class="mr-2"><i class="fas fa-plus"></i></span> Add Blog
     </a>
 </li>
 <li class="menu-list">
-    <a href="{{ route('blogs.index') }}" class="flex items-center {{ request()->is('blogs.index') ? 'active' : '' }}">
+    <a href="{{ route('blogs.index') }}" class="flex items-center hover:underline focus:underline">
         <span class="mr-2"><i class="fa-solid fa-list"></i></span> List Blogs
     </a>
 </li>
+
 
 
 

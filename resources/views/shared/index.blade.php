@@ -1,4 +1,5 @@
 <x-app-layout>
+    
     @section('content')
     <div class="flex justify-center mt-8 >
         <div class="w-2/3">

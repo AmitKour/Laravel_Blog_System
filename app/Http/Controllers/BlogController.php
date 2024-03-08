@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 
+
 use App\Models\User;
 class BlogController extends Controller
 {
@@ -17,10 +18,10 @@ class BlogController extends Controller
         // Don't Save the Blog instance
         //$blog->save();
 
-
         return view('shared.index',[
             'blogs'=>Blog::orderBy('created_at','DESC')->get()
         ]);
+
     }
     public function dashboard()
     {
@@ -32,5 +33,6 @@ class BlogController extends Controller
 
         return view('dashboard', compact('totalUsers','lastFiveBlogs', 'totalBlogs', 'activeBlogs'));
     }
+
 
 }

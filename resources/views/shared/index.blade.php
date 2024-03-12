@@ -1,5 +1,5 @@
 <x-app-layout>
-    
+
     @section('content')
     <div class="flex justify-center mt-8 >
         <div class="w-2/3">
@@ -72,6 +72,14 @@
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about the blog.
                                 </p>
+                            </div>
+                            <div>
+                                <label for="category" class="block text-sm font-medium text-gray-700">Select Category</label>
+                                <select id="category" name="category_id" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

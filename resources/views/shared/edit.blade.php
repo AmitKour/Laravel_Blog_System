@@ -23,10 +23,25 @@
                         <input id="publish" name="publish" type="checkbox" {{ $blog->ispublish ? 'checked' : '' }} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
                     <!-- Content -->
+
                     <div class="mt-4">
                         <label for="content" class="block text-sm font-medium leading-6 text-gray-900">Content</label>
-                        <textarea id="content" name="content" rows="5" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $blog->content }}</textarea>
+                        <input id="content" name="content" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ strip_tags($blog->content) }}">
                     </div>
+
+                     <!-- Category -->
+
+                     <div class="mt-4">
+                        <label for="category" class="block text-sm font-medium leading-6 text-gray-900">Category</label>
+                        <select id="category" name="category" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <option value="">Select a category</option> <!-- Default option -->
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ $category->id == optional($blog)->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
 
                     <div class="mt-6 flex items-center justify-end gap-x-6">
                         <button type="button" onclick="cancelAndRedirect()" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>

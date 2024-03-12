@@ -27,12 +27,17 @@
 
                 </style>
 
-
 <li class="menu-list">
-    <a href="{{ route('dash') }}" class="flex items-center hover:underline focus:underline">
+    <a href="{{ route('shared.create') }}" class="flex items-center hover:underline focus:underline">
         <span class="mr-2"><i class="fas fa-plus"></i></span> Add Blog
     </a>
 </li>
+
+
+
+
+
+
 <li class="menu-list">
     <a href="{{ route('blogs.index') }}" class="flex items-center hover:underline focus:underline">
         <span class="mr-2"><i class="fa-solid fa-list"></i></span> List Blogs
@@ -50,7 +55,9 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            @if(Auth::check())
+    <div>{{ Auth::user()->name }}</div>
+@endif
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -102,9 +109,14 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
+                @if(Auth::check() && Auth::user())
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
+            @endif
+
+            @if(Auth::check() && Auth::user())
+            <div class="font-medium text-base text-gray-800">{{ Auth::user()->email }}</div>
+        @endif
+
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">

@@ -17,13 +17,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($blogs as $blog)
+
                             <tr>
                                 <td class="border px-4 py-2">{{ $blog->title }}</td>
                                 <td class="border px-4 py-2">{{ date('M d, Y', strtotime($blog->date)) }}</td>
                                 <td class="border px-4 py-2">{{ $blog->ispublish ? 'Yes' : 'No' }}</td>
                                 <td class="border px-4 py-2">{!! $blog->content !!}</td>
-                                
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('blogs.edit', $blog->id) }}" class="text-indigo-600 hover:text-indigo-900">
                                         <i class="fa-solid fa-pencil"></i>
@@ -39,7 +38,7 @@
                                     </form>
                                 </td>
                             </tr>
-                            @endforeach
+                    
 
                         </tbody>
                     </table>
@@ -47,9 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="mt-4 flex justify-center">
-        {{ $blogs->links() }} <!-- Pagination links -->
-    </div>
+
     @endsection
 </x-app-layout>
 

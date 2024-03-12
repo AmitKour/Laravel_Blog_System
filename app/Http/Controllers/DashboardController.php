@@ -2,26 +2,23 @@
 
 namespace App\Http\Controllers;
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 
 use App\Models\User;
-class BlogController extends Controller
+
+class DashboardController extends Controller
 {
     public function index(){
-        $blog = new Blog([
-            'title' => 'Default Title',
-            'content' => 'Default Content',
-            'date' => now()->toDateString(), // Set default value to current date
-        ]);
+        // $blog = new Blog([
+        //     'title' => 'Default Title',
+        //     'content' => 'Default Content',
+        //     'date' => now()->toDateString(), // Set default value to current date
+        // ]);
 
-        // Don't Save the Blog instance
-        //$blog->save();
-
-        return view('shared.index',[
-            'blogs'=>Blog::orderBy('created_at','DESC')->get()
-        ]);
-
+        $categories = Category::all();
+        return view('shared.index',compact('categories'));
     }
     public function dashboard()
     {
@@ -33,6 +30,5 @@ class BlogController extends Controller
 
         return view('dashboard', compact('totalUsers','lastFiveBlogs', 'totalBlogs', 'activeBlogs'));
     }
-
 
 }

@@ -15,6 +15,7 @@ class Blog extends Model
         'date',
         'ispublish',
         'picture_url',
+        'category_id',
 
 
     ];
@@ -27,6 +28,9 @@ class Blog extends Model
         'content',
     ];
 
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
 

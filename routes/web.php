@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BlogCreateController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +26,7 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard',[BlogController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,11 +38,15 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
-
-Route::get('/addblog',[BlogController::class,'index'])->name('dash');
+Route::get('/dropdown',[DashboardController::class,'index'])->name('shared.create');
+Route::post('/createblog',[DashboardController::class,'index'])->name('dash');
 Route::post('/blog',[BlogCreateController::class,'store'])->name('blogs.create');
 Route::get('/listblogs', [BlogCreateController::class, 'index'])->name('blogs.index');
 Route::get('/blogs/{id}/edit', [BlogCreateController::class, 'edit'])->name('blogs.edit');
 Route::put('/blogs/{id}', [BlogCreateController::class, 'update'])->name('blogs.update');
 Route::delete('/blogs/{id}', [BlogCreateController::class, 'destroy'])->name('blogs.destroy');
+Route::get('/public', [BlogCreateController::class, 'indexPublic'])->name('blogs.public');
+Route::get('/about', [BlogCreateController::class, 'about'])->name('blogs.about');
+Route::get('/contact', [BlogCreateController::class, 'contact'])->name('blogs.contact');
+Route::get('/blogs/{blog}', [BlogCreateController::class, 'show'])->name('blogs.show');
 

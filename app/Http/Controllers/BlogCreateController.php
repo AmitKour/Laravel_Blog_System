@@ -75,39 +75,33 @@ class BlogCreateController extends Controller
 
 
     public function edit($id)
-{
-    $categories = Category::all();
-    $blog = Blog::findOrFail($id);
+    {
+        $categories = Category::all();
+        $blog = Blog::findOrFail($id);
 
-    return view('shared.edit', compact('categories', 'blog'));
-}
+        return view('shared.edit', compact('categories', 'blog'));
+    }
 
-public function update(Request $request, $id)
-{
-    $blog = Blog::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'date' => 'required|date',
+            // 'ispublish' => 'nullable|boolean',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id'
+        ]);
 
+        $blog = Blog::findOrFail($id);
+        $blog->title = $request->input('title');
+        $blog->date = $request->input('date');
+        $blog->ispublish = $request->has('ispublish') ? true : false;
+        $blog->content = $request->input('content');
+        $blog->category_id = $request->input('category_id');
+        $blog->save();
 
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'date' => 'required|date',
-        'ispublish' => 'nullable|boolean',
-        'content' => 'required',
-        'category_id' => 'required|exists:categories,id'
-    ]);
-
-
-    $blog->update([
-        'title' => $request->input('title'),
-        'date' => $request->input('date'),
-        'ispublish' => $request->has('ispublish'), // Convert checkbox value to boolean
-        'content' => $request->input('content'),
-        'category_id' => $request->input('category_id')
-    ]);
-
-
-    return redirect()->route('blogs.index')->with('success', 'Blog updated successfully');
-}
-
+        return redirect()->route('blogs.index')->with('success', 'Blog updated successfully');
+    }
 public function destroy($id)
 {
 
@@ -132,15 +126,37 @@ public function contact()
     return view('blogs.contact');
 }
 
-public function show($id)
+public function show($id = null, Category $category = null)
 {
-    $blog = Blog::findOrFail($id);
-    return view('blogs.show', compact('blog'));
+    if ($id) {
+        // If an ID is provided, fetch the blog by ID
+        $blog = Blog::findOrFail($id);
+        $category = $blog->category;
+        $blogs = Blog::where('category_id', $blog->category_id)
+                     ->where('id', '!=', $id)
+                     ->take(5)
+                     ->get();
+    } elseif ($category) {
+        // If a category is provided, fetch blogs by category
+        $blogs = Blog::where('category_id', $category->id)
+                     ->take(5)
+                     ->get();
+    } else {
+        // Handle case where neither ID nor category is provided
+        abort(404);
+    }
+
+    // Fetch remaining blogs if count is less than 5
+    if ($blogs->count() < 5) {
+        $remainingBlogs = Blog::where('category_id', '!=', $category->id)
+                              ->orderBy('created_at', 'desc')
+                              ->take(5 - $blogs->count())
+                              ->get();
+        $blogs = $blogs->merge($remainingBlogs);
+    }
+
+    return view('blogs.show', compact('blog', 'blogs', 'category'));
 }
-// public function create()
-// {
-//     $categories = Category::all();
-//     return view('shared.create', compact('categories'));
-// }
+
 
 }

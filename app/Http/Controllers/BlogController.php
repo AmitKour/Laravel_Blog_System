@@ -7,7 +7,7 @@ use App\Models\Blog;
 use App\Models\Category;
 // use App\Models\Category;
 use Illuminate\Support\Facades\Session;
-class BlogCreateController extends Controller
+class BlogController extends Controller
 {
     public function store(Request $request)
     {

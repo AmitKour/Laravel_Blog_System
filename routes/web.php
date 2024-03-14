@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\BlogCreateController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PictureController;
@@ -43,15 +43,15 @@ Route::post('/createblog',[DashboardController::class,'index'])->name('dash');
 
 
 Route::group(['prefix' => 'blogs'], function () {
-    Route::post('/blog', [BlogCreateController::class, 'store'])->name('blogs.create');
-    Route::get('/listblogs', [BlogCreateController::class, 'index'])->name('blogs.index');
-    Route::get('/{id}/edit', [BlogCreateController::class, 'edit'])->name('blogs.edit');
-    Route::patch('/{id}', [BlogCreateController::class, 'update'])->name('blogs.update');
-    Route::delete('/{id}', [BlogCreateController::class, 'destroy'])->name('blogs.destroy');
-    Route::get('/public', [BlogCreateController::class, 'indexPublic'])->name('blogs.public');
-    Route::get('/about', [BlogCreateController::class, 'about'])->name('blogs.about');
-    Route::get('/contact', [BlogCreateController::class, 'contact'])->name('blogs.contact');
-    Route::get('/{blog}', [BlogCreateController::class, 'show'])->name('blogs.show');
+    Route::post('/blog', [BlogController::class, 'store'])->name('blogs.create');
+    Route::get('/listblogs', [BlogController::class, 'index'])->name('blogs.index');
+    Route::get('/{id}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
+    Route::patch('/{id}', [BlogController::class, 'update'])->name('blogs.update');
+    Route::delete('/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+    Route::get('/public', [BlogController::class, 'indexPublic'])->name('blogs.public');
+    Route::get('/about', [BlogController::class, 'about'])->name('blogs.about');
+    Route::get('/contact', [BlogController::class, 'contact'])->name('blogs.contact');
+    Route::get('/{blog}', [BlogController::class, 'show'])->name('blogs.show');
 });
 
 
